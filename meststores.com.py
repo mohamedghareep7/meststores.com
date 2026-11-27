@@ -57,5 +57,11 @@ for pages in range (1,11) :
         rating = item.find("strong" , class_="rating").text
         print("rating :" , rating)
 
-        product_link = item.find("div" , class_="tb-hover-content with-link")
+        product_link = item.find("a" , {"aria-label" : "post content"})["href"]
+        print("product_link :" , product_link)
+
+        product_img = item.find("img")["src"]
+        print("product_img :" , product_img)
+
+        print("="*20)
 
