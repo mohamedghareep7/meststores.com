@@ -26,6 +26,9 @@
 
 import requests
 from bs4 import BeautifulSoup
+import csv
+
+all_products = []
 
 for pages in range (1,11) :
     url = f"https://meststores.com/product-category/printers/page/{pages}/"
@@ -64,4 +67,23 @@ for pages in range (1,11) :
         print("product_img :" , product_img)
 
         print("="*20)
+
+        dict_products = {
+            "description" : description ,
+            "price" : price ,
+            "discount" : discount ,
+            "rating" : rating ,
+            "product_link" : product_link ,
+            "product_img" : product_img ,
+        }
+        all_products.append(dict_products)
+
+header = all_products[0].keys()
+path = "all products.csv"
+
+with open (path , "w" , encoding="utf-8" , newline="") as file :
+    writer = csv.DictWriter(file , header)
+    writer.writeheader()
+    writer.writerows(all_products)
+
 
